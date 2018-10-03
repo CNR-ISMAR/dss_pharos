@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load base_tags %}
+
+
+
+{% block body_class %}Dss inquiry{% endblock %}
+
+
+
+    {% block middle %}
+    <div class="container">
+      {% include "_status_message.html" %}
+      {% include "_announcements.html" %}
+      {% include "_messages.html" %}
+      {% block body_outer %}
+      <div class="row">
+        <div class="col-md-8">
+        {% block body %}
+        <H1>DSS Pharos</H1>
+        <h3>Inquiry form for {{ activity.description }}</h3>
+        <h4>User type: {{ user.user_type }}</h4>
+        
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        
+        <form action="{% url 'activity_result' user.id activity.id %}" method="post">
+        {% csrf_token %}
+        <script>
+          $( function() {
+            $( "#accordion" ).accordion();
+          } );
+        </script>
+        <div id="accordion">
+        {% for question in activity.question_set.all %}
+            <h3>{{ question.question_text }}</h3>
+            
+            <div id="answer_container">
+        
+            {% for answer in question.answer_set.all %}
+            <input type="radio" name="question_{{ question.pk }}" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
+            <label for="question_{{ question.pk }}">{{ answer.answer_text }}</label><br />
+            {% endfor %}
+            </div>
+        {% endfor %}
+        </div>
+        <input type="submit" value="Done" />
+        </form>
+        {% endblock %}
+        </div>
+        <div class="col-md-4">
+        {% block sidebar %}{% endblock %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+    {% endblock middle %}
+
+

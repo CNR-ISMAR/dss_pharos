@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load base_tags %}
+
+
+
+{% block body_class %}Dss home{% endblock %}
+
+
+
+    {% block middle %}
+    <div class="container">
+      {% include "_status_message.html" %}
+      {% include "_announcements.html" %}
+      {% include "_messages.html" %}
+      {% block body_outer %}
+      <div class="row">
+        <div class="col-md-8">
+        {% block body %}
+        <H1>DSS Pharos</H1>
+        <h3>Please select which user type you belong to</h3>
+        {% if usertype_list %}
+        <ul>
+        {% for user in usertype_list %}
+        <li><a href="./{{ user.id }}">{{ user.user_type }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>User type list empty.</p>
+{% endif %}
+        {% endblock %}
+        </div>
+        <div class="col-md-4">
+        {% block sidebar %}{% endblock %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+    {% endblock middle %}
+
+

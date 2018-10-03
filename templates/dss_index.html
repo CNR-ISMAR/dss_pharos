@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load base_tags %}
+
+
+
+{% block body_class %}Dss home{% endblock %}
+
+
+
+    {% block middle %}
+    <div class="container">
+      {% include "_status_message.html" %}
+      {% include "_announcements.html" %}
+      {% include "_messages.html" %}
+      {% block body_outer %}
+      <div class="row">
+        <div class="col-md-8">
+        {% block body %}
+        <H1>DSS Pharos</H1>
+        
+        {% endblock %}
+        </div>
+        <div class="col-md-4">
+        {% block sidebar %}{% endblock %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+    {% endblock middle %}
+
+
