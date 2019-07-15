@@ -1,13 +1,13 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
 # Create your views here.
 
 from .models import UserType, Activity, Question, Answer, Recommendation
 
-def start(request):
-    return HttpResponse("Hello, world. You're at the dss index.")
 
+@login_required
 def level_1(request):
     usertype_list = UserType.objects.order_by('id')
     #output = '<br> '.join([p.user_type for p in usertype_list])
@@ -17,6 +17,7 @@ def level_1(request):
     }
     return HttpResponse(template.render(context, request))
 
+@login_required
 def level_2(request, usertype_id):
     activity_list = Activity.objects.order_by('id')
     usertype = get_object_or_404(UserType, pk=usertype_id)
@@ -27,31 +28,44 @@ def level_2(request, usertype_id):
     }
     return HttpResponse(template.render(context, request))
 
-
-
+@login_required
+def activity_bg_info(request, usertype_id, activity_id):
+    activity = get_object_or_404(Activity, pk=activity_id)
+    usertype = UserType.objects.get(pk=usertype_id)
+    template = loader.get_template('bg_information.html')
+    context = {
+        'usertype': usertype,
+        'activity': activity,
+        #'activity_description': activity.description,
+        #'activity_id': activity.pk,
+    }
+    return HttpResponse(template.render(context, request))
+    
+@login_required
 def activity_form(request, usertype_id, activity_id):
     activity = get_object_or_404(Activity, pk=activity_id)
-    user = UserType.objects.get(pk=usertype_id)
+    usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('form.html')
     context = {
-        'user': user,
+        'usertype': usertype,
         'activity': activity,
         #'activity_description': activity.description,
         #'activity_id': activity.pk,
     }
     return HttpResponse(template.render(context, request))
 
+@login_required
 def activity_result(request, usertype_id, activity_id):
-    answer_list = set()
+    answer_list = ()
     for key, value in request.POST.items():
         if key[0:9]=='question_':
-            answer_list.add(value)
+            answer_list= answer_list + (value,)
     recommendation_list = Recommendation.objects.filter(answer__in=answer_list).distinct()
     activity = get_object_or_404(Activity, pk=activity_id)
-    user = UserType.objects.get(pk=usertype_id)
+    usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('result.html')
     context = {
-        'user': user,
+        'usertype': usertype,
         'activity': activity,
         'recommendation_list': recommendation_list,
     }

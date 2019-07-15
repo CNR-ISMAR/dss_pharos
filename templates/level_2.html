@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "dss_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load base_tags %}
 
 
 
-{% block body_class %}Dss home{% endblock %}
+{% block body_class %}Dss{% endblock %}
 
 
 
@@ -20,7 +20,9 @@
         {% block body %}
         <H1>DSS Pharos</H1>
         
-        <h2>Intervent selections for {{ usertype.user_type }}</h2>
+        <h2>Economic sector selection</h2>
+        <h4>User type: {{ usertype.user_type }}</h4>
+
         {% if activity_list %}
         <ul>
         {% for activity in activity_list %}

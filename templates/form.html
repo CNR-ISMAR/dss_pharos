@@ -1,11 +1,11 @@
-{% extends "base.html" %}
+{% extends "dss_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
 {% load base_tags %}
 
 
 
-{% block body_class %}Dss inquiry{% endblock %}
+{% block body_class %}Dss{% endblock %}
 
 
 
@@ -20,7 +20,7 @@
         {% block body %}
         <H1>DSS Pharos</H1>
         <h3>Inquiry form for {{ activity.description }}</h3>
-        <h4>User type: {{ user.user_type }}</h4>
+        <h4>User type: {{ usertype.user_type }}</h4>
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         
@@ -44,7 +44,9 @@
             </div>
         {% endfor %}
         </div>
-        <input type="submit" value="Done" />
+        <input type="reset" value="Clear" />
+	&nbsp;
+	<input type="submit" value="Done" />
         </form>
         {% endblock %}
         </div>

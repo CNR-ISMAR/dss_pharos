@@ -9,3 +9,17 @@ DATABASES.update({'dss_pharos_db': {
         'PORT': '5432',
     }
 })
+
+SITE_NAME = 'DSS Pharos For MPAs'
+
+TEMPLATES = [
+
+{
+
+
+	'APP_DIRS' : True
+
+},
+]
+
+#ALLOWED_HOSTS = ALLOWED_HOSTS + 'pharos4mpas.tools4msp.eu'
