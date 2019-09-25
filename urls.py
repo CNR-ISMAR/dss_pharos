@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^start$', views.level_1, name='dss_1'),
     url(r'^(?P<usertype_id>\d+)$', views.level_2, name='dss_2'),
     url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)$', views.activity_bg_info, name='activity_bg_info'),
+    url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)/interactions$', views.activity_interactions, name='activity_interactions'),
     url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)/form$', views.activity_form, name='activity_form'),
     url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)/result$', views.activity_result, name='activity_result'),
     

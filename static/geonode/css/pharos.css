@@ -1,0 +1,35 @@
+.pharos-navbar{
+
+    background: url(../img/logo_pharos.jpg) 0 10px no-repeat;
+    background-size: 100%;
+    text-indent: -9999px;
+    height: 80px;
+    width: 200px;
+}
+
+.pharos-navbar {
+  float: left;
+  padding: 14px 15px;
+  font-size: 20px;
+  line-height: 22px;
+  min-height: 50px;
+}
+.pharos-navbar:hover,
+.pharos-navbar:focus {
+  text-decoration: none;
+}
+.pharos-navbar > img {
+  display: block;
+}
+@media (min-width: 768px) {
+  .navbar > .container .pharos-navbar,
+  .navbar > .container-fluid .pharos-navbar {
+    margin-left: -15px;
+  }
+}
+
+#wrap {
+
+padding-top: 60px;
+
+}
