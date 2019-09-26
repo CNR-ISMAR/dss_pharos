@@ -1,0 +1,51 @@
+{% extends "dss_base.html" %}
+{% load i18n %}
+{% load staticfiles %}
+{% load base_tags %}
+
+
+
+{% block body_class %}Dss{% endblock %}
+
+
+
+    {% block middle %}
+    <div class="container">
+      {% include "_status_message.html" %}
+      {% include "_announcements.html" %}
+      {% include "_messages.html" %}
+      {% block body_outer %}
+      <div class="row">
+        <div class="col-md-8">
+        {% block body %}
+        <H1>DSS Pharos</H1>
+        <h4>User type: {{ usertype.user_type }}</h4>
+      
+        <h3>Recommendations and info  for {{ activity.description }}</h3>
+	  {% if recommendation_list %}
+          {% for recommendation in recommendation_list %}
+        <p>{{ recommendation.recommendation_text | safe }} </p>
+	    {% endfor %}
+    {% else %}
+    <p>Recommendation list empty.</p>
+    {% endif %}
+        {% endblock %}
+        </div>
+        <div class="col-md-4">
+        {% block sidebar %}
+        <a id="restart"  class="btn btn-primary btn-md btn-block" href="/dss_pharos/start">
+        <h4>Restart Inquiry</h4>
+        </a>
+
+        <a id="restart"  class="btn btn-primary btn-md btn-block" href="/dss_pharos/{{ usertype.pk }}/{{ activity.id }}/form">
+        <h4>Back to form</h4>
+        </a>
+
+	{% endblock %}
+        </div>
+      </div>
+      {% endblock %}
+    </div>
+    {% endblock middle %}
+
+
