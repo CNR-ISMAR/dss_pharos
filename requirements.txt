@@ -1,2 +1,6 @@
 bootstrap3_datetime
 django_filters
+avatar
+django-avatar
+django-allauth
+django-allauth
