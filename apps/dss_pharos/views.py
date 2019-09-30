@@ -70,8 +70,8 @@ def activity_result(request, usertype_id, activity_id):
     return HttpResponse(template.render(context, request))
 
 def help(request):
-    template = loader.get_template('help.html'),
+    template = loader.get_template('help.html')
     context = {
-        'help': none,
+        #'help': True,
     }
-    return HttpResponse(template.render(context, request))
+    return HttpResponse(template.render())
