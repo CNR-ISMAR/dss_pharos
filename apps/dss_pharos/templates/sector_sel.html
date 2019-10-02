@@ -1,7 +1,6 @@
 {% extends "dss_base.html" %}
 {% load i18n %}
 {% load staticfiles %}
-{% load base_tags %}
 
 
 
@@ -11,9 +10,6 @@
 
     {% block middle %}
     <div class="container">
-      {% include "_status_message.html" %}
-      {% include "_announcements.html" %}
-      {% include "_messages.html" %}
       {% block body_outer %}
       <div class="row">
         <div class="col-md-8">
@@ -21,16 +17,15 @@
         <H1>DSS Pharos</H1>
         
         <h2>Economic sector selection</h2>
-        <h4>User type: {{ usertype.user_type }}</h4>
 
-        {% if activity_list %}
+        {% if economic_sector_list %}
         <ul>
-        {% for activity in activity_list %}
-        <li><a href="{{ usertype.id }}/{{ activity.id }}">{{ activity.description }}</a></li>
+        {% for economic_sector in economic_sector_list %}
+        <li><a href="{{ usertype.id }}/{{ economic_sector.id }}">{{ economic_sector.description }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
-    <p>Activity list empty.</p>
+    <p>Economic Sector list empty.</p>
 {% endif %}
         {% endblock %}
         </div>

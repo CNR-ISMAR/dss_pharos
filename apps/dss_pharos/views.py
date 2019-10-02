@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
+from .models import UserType, EconomicSector, Recommendation, Answer, Question
 
 # Create your views here.
 
@@ -16,55 +17,61 @@ def level_1(request):
     return HttpResponse(template.render(context, request))
 
 @login_required
-def level_2(request, usertype_id):
-    activity_list = Activity.objects.order_by('id')
-    usertype = get_object_or_404(UserType, pk=usertype_id)
-    template = loader.get_template('level_2.html')
+def sector_sel(request):
+    economic_sector_list = EconomicSector.objects.order_by('id')
+    template = loader.get_template('sector_sel.html')
     context = {
-        'usertype': usertype,
-        'activity_list': activity_list,
+        'economic_sector_list': economic_sector_list,
     }
     return HttpResponse(template.render(context, request))
 
 @login_required
-def activity_bg_info(request, usertype_id, activity_id):
-    activity = get_object_or_404(Activity, pk=activity_id)
-    usertype = UserType.objects.get(pk=usertype_id)
+def economic_sector_bg_info(request,  economic_sector_id):
+    economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('bg_information.html')
     context = {
-        'usertype': usertype,
-        'activity': activity,
-        #'activity_description': activity.description,
-        #'activity_id': activity.pk,
+        'economic_sector': economic_sector,
+        #'economic_sector_description': economic_sector.description,
+        #'economic_sector_id': economic_sector.pk,
     }
     return HttpResponse(template.render(context, request))
     
 @login_required
-def activity_form(request, usertype_id, activity_id):
-    activity = get_object_or_404(Activity, pk=activity_id)
-    usertype = UserType.objects.get(pk=usertype_id)
+def economic_sector_interactions(request,  economic_sector_id):
+    economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
+    template = loader.get_template('interactions.html')
+    context = {
+        'economic_sector': economic_sector,
+        #'economic_sector_description': economic_sector.description,
+        #'economic_sector_id': economic_sector.pk,
+    }
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
+def economic_sector_form(request, economic_sector_id):
+    economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('form.html')
     context = {
-        'usertype': usertype,
-        'activity': activity,
-        #'activity_description': activity.description,
-        #'activity_id': activity.pk,
+        'economic_sector': economic_sector,
+        #'economic_sector_description': economic_sector.description,
+        #'economic_sector_id': economic_sector.pk,
     }
 
 
 @login_required
-def activity_result(request, usertype_id, activity_id):
+def economic_sector_result(request, usertype_id, economic_sector_id):
     answer_list = ()
     for key, value in request.POST.items():
         if key[0:9]=='question_':
             answer_list= answer_list + (value,)
     recommendation_list = Recommendation.objects.filter(answer__in=answer_list).distinct()
-    activity = get_object_or_404(Activity, pk=activity_id)
+    economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('result.html')
     context = {
         'usertype': usertype,
-        'activity': activity,
+        'economic_sector': economic_sector,
         'recommendation_list': recommendation_list,
     }
     return HttpResponse(template.render(context, request))

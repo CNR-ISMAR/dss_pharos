@@ -17,22 +17,21 @@
         <H1>DSS Pharos</H1>
 	{% load django_bootstrap_breadcrumbs %}
 	{% block breadcrumbs %}
-	{% breadcrumb 'User Type Selection' level_1 %}
 	{% breadcrumb 'Economic Sector selection' level_2 %}
       	{% breadcrumb 'Background information' bg_info %}
+      	{% breadcrumb 'Impacts/Interactions' interactions %}
 	{% endblock %}	
 
-        <h3>Background information for {{ economic_sector.description }}</h3>
-        <h4>User type: {{ usertype.user_type }}</h4>
+        <h3>Impacts /Interactions for  {{ economic_sector.description }}</h3>
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         
         {% csrf_token %}
 
         <div id="info">
-        {{ economic_sector.bg_information | safe }}
+        {{ economic_sector.interactions | safe }}
         </div>
-        {% if economic_sector.bg_image %}
+        {% if economic_sector.interactions_image %}
         <div id="image">
         <img src="/uploaded/{{ economic_sector.bg_image}}" width="720">
         </div>
@@ -43,8 +42,8 @@
         </div>
         <div class="col-md-4">
         {% block sidebar %}
-        <a id="next"  class="btn btn-primary btn-md btn-block" href="/{{ economic_sector.id }}/ii">
-	<h4>Next</h4>
+        <a id="proceed"  class="btn btn-primary btn-md btn-block" href="/{{ economic_sector.id }}/form">
+	<h4>Proceed</h4>
         </a>
 
 	{% endblock %}

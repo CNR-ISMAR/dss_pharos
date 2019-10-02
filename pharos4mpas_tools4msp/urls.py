@@ -10,7 +10,7 @@ urlpatterns += [
 #url(r'^.*$', include('apps.dss_pharos.urls')),  
 
 #social
-url(r"^account/", include("allauth.urls")),
+url(r"^accounts/", include("allauth.urls")),
 
 path('admin/', admin.site.urls),
 

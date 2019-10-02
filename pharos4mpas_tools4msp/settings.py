@@ -148,15 +148,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
-
+STATIC_ROOT = 'static/'
 STATIC_URL = '/static/'
-
-
-# DSS PHAROS
-STATIC_ROOT = '/opt/pharos4mpas_tools4msp/static/'
-SITEURL = "https://pharos4mpas.tools4msp.eu"
-
-CKEDITOR_UPLOAD_PATH = 'cked_upload'
+MEDIA_URL = STATIC_URL + 'uploads/'
+MEDIA_ROOT = STATIC_ROOT + 'uploads/'
+CKEDITOR_UPLOAD_PATH = 'cked_uploads/'
 
 #DATABASE_ENGINE = 'postgresql_psycopg2'
 # DATABASE_NAME = 'pharos4mpas_tools4msp'
@@ -175,3 +171,7 @@ CKEDITOR_UPLOAD_PATH = 'cked_upload'
         # 'PORT': DATABASE_PORT,
     # },
 # }
+try:
+    from local_settings import *
+except ImportError:
+    pass

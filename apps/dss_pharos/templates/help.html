@@ -22,7 +22,7 @@
       	{% breadcrumb 'Background information' bg_info %}
 	{% endblock %}	
 
-        <h3>Background information for {{ economic_sector.description }}</h3>
+        <h3>HELP</h3>
         <h4>User type: {{ usertype.user_type }}</h4>
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
@@ -34,7 +34,7 @@
         </div>
         {% if economic_sector.bg_image %}
         <div id="image">
-        <img src="/uploaded/{{ economic_sector.bg_image}}" width="720">
+        <img src="/uploaded/tool_overview.png" width="720">
         </div>
         {% endif %}
         
@@ -43,8 +43,8 @@
         </div>
         <div class="col-md-4">
         {% block sidebar %}
-        <a id="next"  class="btn btn-primary btn-md btn-block" href="/{{ economic_sector.id }}/ii">
-	<h4>Next</h4>
+        <a id="proceed"  class="btn btn-primary btn-md btn-block" href="/{{ usertype.id }}/{{ economic_sector.id }}/form">
+	<h4>Proceed</h4>
         </a>
 
 	{% endblock %}

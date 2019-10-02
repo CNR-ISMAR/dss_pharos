@@ -6,11 +6,11 @@ from apps.dss_pharos import views
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='dss_index.html'), name='dsshome'),
     url(r'^index$', TemplateView.as_view(template_name='dss_index.html'), name='dsshome'),
-    url(r'^start$', views.level_1, name='dss_1'),
-    url(r'^(?P<usertype_id>\d+)$', views.level_2, name='dss_2'),
-    url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)$', views.activity_bg_info, name='activity_bg_info'),
-    url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)/form$', views.activity_form, name='activity_form'),
-    url(r'^(?P<usertype_id>\d+)/(?P<activity_id>\d+)/result$', views.activity_result, name='activity_result'),
+    url(r'^start$', views.sector_sel, name='dss_1'),
+    url(r'^(?P<economic_sector_id>\d+)$', views.economic_sector_bg_info, name='economic_sector_bg_info'),
+    url(r'^(?P<economic_sector_id>\d+)/ii$', views.economic_sector_interactions, name='economic_sector_interactions'),
+    url(r'^(?P<economic_sector_id>\d+)/form$', views.economic_sector_form, name='economic_sector_form'),
+    url(r'^(?P<usertype_id>\d+)/(?P<economic_sector_id>\d+)/result$', views.economic_sector_result, name='economic_sector_result'),
     
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
 ]

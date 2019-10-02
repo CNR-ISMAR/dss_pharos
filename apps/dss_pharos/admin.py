@@ -6,9 +6,12 @@ from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 # Register your models here.
-from .models import UserType, Activity, Question, Answer, Recommendation, Collection
+from .models import UserType, EconomicSector, Question, Answer, Recommendation, Collection
 
-class ActivityAdmin(admin.ModelAdmin):
+class EconomicSectorAdmin(admin.ModelAdmin):
+    fields = ['title', 'description']
+    list_display = ['title','description',]
+
     pass
 
 
@@ -22,33 +25,33 @@ class AnswerInline(admin.TabularInline):
     extra = 3
 
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ['activity', 'question_level','question_text', 'multichoice']
+    fields = ['economic_sector', 'question_level','question_text', 'multichoice']
     inlines = [AnswerInline]
-    list_filter = ['activity']
+    list_filter = ['economic_sector']
 
 
 class CollectionInline(admin.TabularInline):
     model = Collection
     extra = 10
-    list_filter = ['activity']
+    list_filter = ['economic_sector']
     
 
 #class RecommendationAdminForm(forms.ModelForm):
 #    recommendation_text = forms.CharField(widget=CKEditorWidget())
-#    fields = ['activity', 'recommendation_text', 'condition']
+#    fields = ['economic_sector', 'recommendation_text', 'condition']
 #    class Meta:
 #        model = Recommendation
 
 class RecommendationAdmin(admin.ModelAdmin):
 #form = RecommendationAdminForm
-    fields = ['activity','title', 'recommendation_text', 'condition']
+    fields = ['economic_sector','title', 'recommendation_text', 'condition']
     inlines = [CollectionInline]
-    list_filter = ['activity']
-    list_display = ('pk','activity', 'title',)
+    list_filter = ['economic_sector']
+    list_display = ('pk','economic_sector', 'title',)
     filter_horizontal = ('answer',)
 
 admin.site.register(UserType)
-admin.site.register(Activity)
+admin.site.register(EconomicSector)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Recommendation,RecommendationAdmin)
