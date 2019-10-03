@@ -4,3 +4,4 @@ avatar
 django-avatar
 django-allauth
 django-allauth
+django-autocomplete-light
