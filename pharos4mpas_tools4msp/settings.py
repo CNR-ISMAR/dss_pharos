@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'autocomplete-light',
+    'dal',
+    'dal_select2',
 
     # dss pharos
     'django_extensions',
