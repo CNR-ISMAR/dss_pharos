@@ -19,7 +19,7 @@ class AnswerInline(admin.TabularInline):
     extra = 3
 
 class QuestionAdmin(admin.ModelAdmin):
-    fields = ['activity', 'question_level','question_text', 'multichoice']
+    fields = ['activity', 'question_level','impact_name', 'multichoice']
     inlines = [AnswerInline]
     list_filter = ['activity']
 

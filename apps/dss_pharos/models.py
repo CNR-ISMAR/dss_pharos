@@ -21,40 +21,30 @@ class EconomicSector(models.Model):
         return self.description
 
 
-class Question(models.Model):
+class Impact(models.Model):
     economic_sector = models.ManyToManyField(EconomicSector) 
-    question_text = models.TextField(max_length=500)
-    question_level = models.PositiveSmallIntegerField(default=1)
-    multichoice = models.BooleanField("multi", default=0)
+    user_type = models.ManyToManyField(UserType)
+    impact_name = models.TextField(max_length=100)
+
+
     #set ordering parameters for the class
     class Meta:
-        ordering = ["question_level"]
+        ordering = ['impact_name']
     def __str__(self):
-        return self.question_text
+        return self.impact_name
     def ecnonomic_sector_list(self):
         return ','.join(self.economic_sector)
 
 
-class Answer(models.Model):
-#    order = models.AutoField()
-    question = models.ForeignKey(Question, null=True, on_delete=models.SET_NULL)
-    answer_text = models.CharField(max_length=200)
-    class Meta:
-        ordering = ["pk"]
-    def __unicode__(self):
-        return str(self.question) + ' -' + self.answer_text
-    def desc(self):
-        return self.answer_text
-    def economic_sector_list(self):
-        return ','.join(self.question.economic_sector_set)
 
 class Recommendation(models.Model):
     economic_sector = models.ForeignKey(EconomicSector, blank=True, null=True, on_delete=models.SET_NULL)
-    answer = models.ManyToManyField(Answer, through='Collection')
+    user_type = models.ForeignKey(UserType, blank=True, null=True, on_delete=models.SET_NULL)
+    impact = models.ManyToManyField(Impact, through='Collection')
     title = models.CharField(max_length=100)
     recommendation_text = RichTextUploadingField()
-    condition = models.CharField(max_length=3, choices=(('AND', 'AND'),('OR', 'OR'),('NOT', 'NOT'),), default='OR')
- 
+
+
     def __unicode__(self):
         return self.title
     def desc(self):
@@ -64,7 +54,7 @@ class Recommendation(models.Model):
 
 class Collection(models.Model):
         recommendation = models.ForeignKey(Recommendation, on_delete=models.CASCADE)
-        answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
+        impact = models.ForeignKey(Impact, on_delete=models.CASCADE)
 
 
 

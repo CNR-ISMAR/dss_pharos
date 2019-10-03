@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
-from .models import UserType, EconomicSector, Recommendation, Answer, Question
+from .models import UserType, EconomicSector, Recommendation,  Impact
 
 # Create your views here.
 
@@ -54,6 +54,8 @@ def economic_sector_form(request, economic_sector_id):
     template = loader.get_template('form.html')
     context = {
         'economic_sector': economic_sector,
+        'user_type_list': user_type_list,
+        'impact_list':impact_list,
         #'economic_sector_description': economic_sector.description,
         #'economic_sector_id': economic_sector.pk,
     }

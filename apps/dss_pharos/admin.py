@@ -6,7 +6,7 @@ from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 # Register your models here.
-from .models import UserType, EconomicSector, Question, Answer, Recommendation, Collection
+from .models import UserType, EconomicSector, Impact,  Recommendation, Collection
 
 class EconomicSectorAdmin(admin.ModelAdmin):
     fields = ['title', 'description']
@@ -15,18 +15,15 @@ class EconomicSectorAdmin(admin.ModelAdmin):
     pass
 
 
-class AnswerAdmin(admin.ModelAdmin):
-    fields = ['question', 'answer_text']
-    list_display = ('question','desc',)
+# class UserTypeInline(admin.TabularInline):
+#     model = UserType
+#     extra = 10
 
 
-class AnswerInline(admin.TabularInline):
-    model = Answer
-    extra = 3
 
-class QuestionAdmin(admin.ModelAdmin):
-    fields = ['economic_sector', 'question_level','question_text', 'multichoice']
-    inlines = [AnswerInline]
+class ImpactAdmin(admin.ModelAdmin):
+    fields = ['economic_sector', 'question_level','impact_name', 'multichoice']
+    # inlines = [UserTypeInline]
     list_filter = ['economic_sector']
 
 
@@ -48,11 +45,10 @@ class RecommendationAdmin(admin.ModelAdmin):
     inlines = [CollectionInline]
     list_filter = ['economic_sector']
     list_display = ('pk','economic_sector', 'title',)
-    filter_horizontal = ('answer',)
+    filter_horizontal = ('impact',)
 
 admin.site.register(UserType)
 admin.site.register(EconomicSector)
-admin.site.register(Question, QuestionAdmin)
-admin.site.register(Answer, AnswerAdmin)
+admin.site.register(Impact, ImpactAdmin)
 admin.site.register(Recommendation,RecommendationAdmin)
 
