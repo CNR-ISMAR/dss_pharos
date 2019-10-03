@@ -54,7 +54,7 @@ class Recommendation(models.Model):
 
 class Collection(models.Model):
         recommendation = models.ForeignKey(Recommendation, on_delete=models.CASCADE)
-        impact = models.ForeignKey(Impact, on_delete=models.CASCADE)
+        impact = models.ForeignKey(Impact, blank=True, null=True, on_delete=models.SET_NULL)
 
 
 
