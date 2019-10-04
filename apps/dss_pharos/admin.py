@@ -10,9 +10,11 @@ from .models import UserType, EconomicSector, Impact,  Recommendation, Collectio
 
 class EconomicSectorAdmin(admin.ModelAdmin):
     fields = ['title', 'description']
-    list_display = ['title','description',]
+    list_display = ('id', 'title','description')
+    list_display_links = ('id', 'title')
+    ordering = ['id']
 
-    pass
+
 
 
 # class UserTypeInline(admin.TabularInline):
@@ -22,8 +24,10 @@ class EconomicSectorAdmin(admin.ModelAdmin):
 
 
 class ImpactAdmin(admin.ModelAdmin):
-    fields = ['economic_sector', 'question_level','impact_name', 'multichoice']
+    fields = ['economic_sector',  'impact_name', 'impact_description', ]
     # inlines = [UserTypeInline]
+    ordering = ["id"]
+    list_display= ('id',  'impact_name')
     list_filter = ['economic_sector']
 
 
@@ -41,14 +45,14 @@ class CollectionInline(admin.TabularInline):
 
 class RecommendationAdmin(admin.ModelAdmin):
 #form = RecommendationAdminForm
-    fields = ['economic_sector','title', 'recommendation_text', 'condition']
+    fields = ['economic_sector',  'title', 'user_type', 'all_users', 'recommendation_text', ]
     inlines = [CollectionInline]
-    list_filter = ['economic_sector']
+    list_filter = ['economic_sector', 'user_type']
     list_display = ('pk','economic_sector', 'title',)
     filter_horizontal = ('impact',)
 
 admin.site.register(UserType)
-admin.site.register(EconomicSector)
+admin.site.register(EconomicSector, EconomicSectorAdmin)
 admin.site.register(Impact, ImpactAdmin)
 admin.site.register(Recommendation,RecommendationAdmin)
 

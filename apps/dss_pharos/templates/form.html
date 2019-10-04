@@ -19,29 +19,41 @@
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         
-        <form action="{% url 'activity_result' user.id activity.id %}" method="post">
+        <form action="#" method="post">
         {% csrf_token %}
         <script>
-          $( function() {
-            $( "#accordion" ).accordion();
+          var selectedUsertype;
+          $(document).ready( function() {
+                $("select.usertype").change(function(){
+                console.log
+                var selectedUsertype = $(this).children("option:selected").val();
+                alert("You have selected the usertype  - " + selectedUserType);
+
+                });
           } );
+          updateForm = function(){
+            user = $('select.usertype').children("option:selected").val();
+            $('form').attr('action', '/1/'+ user + '/result');
+            disabled = (user == '0')
+            $(':input[type="submit"]').prop('disabled', disabled)
+
+            }
+
+
         </script>
-        <div id="accordion">
-        {% for question in economic_sector.question_set.all %}
-            <h3>{{ question.question_text }}</h3>
-            
-            <div id="answer_container">
-        
-            {% for answer in question.answer_set.all %}
-            <input type="radio" name="question_{{ question.pk }}" id="answer{{ forloop.counter }}" value="{{ answer.id }}" />
-            <label for="question_{{ question.pk }}">{{ answer.answer_text }}</label><br />
-            {% endfor %}
-            </div>
+        <div id="selectdiv">
+            <select class="usertype" onchange="updateForm()">
+                <option value="0" selected>---------</option>
+        {% for usertype in usertype_list %}
+            <option value="{{ usertype.pk }}">{{ usertype.user_type }}</option>
         {% endfor %}
+           </select>
+            <div id="impact_list">
+            {% include "impact_list_form.html" %}
+               </div>
         </div>
         <input type="reset" value="Clear" />
-	&nbsp;
-	<input type="submit" value="Done" />
+		<input type="submit" value="Submit" disabled />
         </form>
         {% endblock %}
         </div>

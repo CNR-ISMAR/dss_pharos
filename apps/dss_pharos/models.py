@@ -23,8 +23,8 @@ class EconomicSector(models.Model):
 
 class Impact(models.Model):
     economic_sector = models.ManyToManyField(EconomicSector) 
-    user_type = models.ManyToManyField(UserType)
-    impact_name = models.TextField(max_length=100)
+    impact_name = models.CharField(max_length=100)
+    impact_description = models.TextField(max_length=500, null=True, blank=True)
 
 
     #set ordering parameters for the class
@@ -40,9 +40,11 @@ class Impact(models.Model):
 class Recommendation(models.Model):
     economic_sector = models.ForeignKey(EconomicSector, blank=True, null=True, on_delete=models.SET_NULL)
     user_type = models.ForeignKey(UserType, blank=True, null=True, on_delete=models.SET_NULL)
+    all_users = models.BooleanField(default=False)
     impact = models.ManyToManyField(Impact, through='Collection')
     title = models.CharField(max_length=100)
     recommendation_text = RichTextUploadingField()
+
 
 
     def __unicode__(self):

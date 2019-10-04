@@ -17,13 +17,12 @@
         <H1>DSS Pharos</H1>
 	{% load django_bootstrap_breadcrumbs %}
 	{% block breadcrumbs %}
-	{% breadcrumb 'User Type Selection' level_1 %}
-	{% breadcrumb 'Economic Sector selection' level_2 %}
-      	{% breadcrumb 'Background information' bg_info %}
+	{% breadcrumb 'Economic Sector selection' sector_sel %}
+   	{% breadcrumb 'Background information' bg_info %}
 	{% endblock %}	
 
         <h3>Background information for {{ economic_sector.description }}</h3>
-        <h4>User type: {{ usertype.user_type }}</h4>
+
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         

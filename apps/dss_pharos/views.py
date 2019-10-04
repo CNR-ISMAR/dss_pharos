@@ -31,8 +31,8 @@ def economic_sector_bg_info(request,  economic_sector_id):
     template = loader.get_template('bg_information.html')
     context = {
         'economic_sector': economic_sector,
-        #'economic_sector_description': economic_sector.description,
-        #'economic_sector_id': economic_sector.pk,
+        'economic_sector_description': economic_sector.description,
+        'economic_sector_id': economic_sector.pk,
     }
     return HttpResponse(template.render(context, request))
     
@@ -50,24 +50,29 @@ def economic_sector_interactions(request,  economic_sector_id):
 
 @login_required
 def economic_sector_form(request, economic_sector_id):
+    usertype_list = UserType.objects.order_by('id')
+    impact_list = Impact.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('form.html')
     context = {
         'economic_sector': economic_sector,
-        'user_type_list': user_type_list,
+        'usertype_list': usertype_list,
         'impact_list':impact_list,
         #'economic_sector_description': economic_sector.description,
         #'economic_sector_id': economic_sector.pk,
     }
+    return HttpResponse(template.render(context, request))
+
+
 
 
 @login_required
 def economic_sector_result(request, usertype_id, economic_sector_id):
-    answer_list = ()
+    impact_list = ()
     for key, value in request.POST.items():
-        if key[0:9]=='question_':
-            answer_list= answer_list + (value,)
-    recommendation_list = Recommendation.objects.filter(answer__in=answer_list).distinct()
+        if key[0:6]=='impact_':
+            impact_list= impact_list + (value,)
+    recommendation_list = Recommendation.objects.filter(impact__in=impact_list, user_type__id__=usertype_id)
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('result.html')
