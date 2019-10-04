@@ -50,7 +50,7 @@ def economic_sector_interactions(request,  economic_sector_id):
 
 #@login_required
 def economic_sector_form(request, economic_sector_id):
-    usertype_list = UserType.objects.order_by('id')
+    usertype_list = UserType.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
     impact_list = Impact.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('form.html')
