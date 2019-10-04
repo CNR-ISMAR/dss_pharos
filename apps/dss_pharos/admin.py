@@ -9,7 +9,7 @@ from ckeditor.widgets import CKEditorWidget
 from .models import UserType, EconomicSector, Impact,  Recommendation, Collection
 
 class EconomicSectorAdmin(admin.ModelAdmin):
-    fields = ['title', 'description']
+    fields = ['title', 'description', 'bg_information', 'bg_image','interactions', 'interactions_image']
     list_display = ('id', 'title','description')
     list_display_links = ('id', 'title')
     ordering = ['id']

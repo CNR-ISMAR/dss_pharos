@@ -70,7 +70,7 @@ def economic_sector_form(request, economic_sector_id):
 def economic_sector_result(request, usertype_id, economic_sector_id):
     impact_list = ()
     for key, value in request.POST.items():
-        if key[0:6]=='impact_':
+        if key[0:6]=='impact':
             impact_list= impact_list + (value,)
     recommendation_list = Recommendation.objects.filter(impact__in=impact_list, user_type__id__=usertype_id)
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)

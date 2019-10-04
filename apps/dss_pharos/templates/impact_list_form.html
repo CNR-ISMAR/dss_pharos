@@ -1,5 +1,5 @@
 <ul>
     {% for impact in impact_list %}
-    <li><input type="checkbox" name="{{ impact.pk }}" value="{{ impact.pk }}" checked>{{ impact.impact_name }} &nbsp;</li>
+    <li><input type="checkbox" name="impact_{{ impact.pk }}" value="{{ impact.pk }}" checked>{{ impact.impact_name }} &nbsp;</li>
     {% endfor %}
 </ul>

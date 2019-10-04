@@ -19,8 +19,8 @@
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         
-        <form action="#" method="post">
-        {% csrf_token %}
+
+
         <script>
           var selectedUsertype;
           $(document).ready( function() {
@@ -31,7 +31,8 @@
 
                 });
           } );
-          updateForm = function(){
+
+          function updateForm(){
             user = $('select.usertype').children("option:selected").val();
             $('form').attr('action', '/1/'+ user + '/result');
             disabled = (user == '0')
@@ -41,6 +42,8 @@
 
 
         </script>
+        <form action="#" method="post">
+        {% csrf_token %}
         <div id="selectdiv">
             <select class="usertype" onchange="updateForm()">
                 <option value="0" selected>---------</option>
