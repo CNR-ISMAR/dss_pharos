@@ -4,10 +4,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 # Create your models here.
 from django.db import models
 
-class UserType(models.Model):
-    user_type = models.CharField(max_length=80)
-    def __str__(self):
-        return self.user_type
+
 
 class EconomicSector(models.Model):
     title = models.CharField(max_length=80, blank=True, null=True, )
@@ -19,6 +16,12 @@ class EconomicSector(models.Model):
 
     def __str__(self):
         return self.description
+
+class UserType(models.Model):
+    user_type = models.CharField(max_length=80)
+    economic_sector = models.ManyToManyField(EconomicSector)
+    def __str__(self):
+        return self.user_type
 
 
 class Impact(models.Model):
