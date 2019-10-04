@@ -11,7 +11,7 @@ urlpatterns += [
 
 #social
 url(r"^accounts/", include("allauth.urls")),
-
+url(r"^account/", include("allauth.urls")),
 path('admin/', admin.site.urls),
 
 path('help/', views.help, name='help'),

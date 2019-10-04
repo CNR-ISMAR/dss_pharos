@@ -6,7 +6,7 @@ from .models import UserType, EconomicSector, Recommendation,  Impact
 
 # Create your views here.
 
-@login_required
+#@login_required
 def level_1(request):
     usertype_list = UserType.objects.order_by('id')
     #output = '<br> '.join([p.user_type for p in usertype_list])
@@ -16,7 +16,7 @@ def level_1(request):
     }
     return HttpResponse(template.render(context, request))
 
-@login_required
+#@login_required
 def sector_sel(request):
     economic_sector_list = EconomicSector.objects.order_by('id')
     template = loader.get_template('sector_sel.html')
@@ -25,7 +25,7 @@ def sector_sel(request):
     }
     return HttpResponse(template.render(context, request))
 
-@login_required
+#@login_required
 def economic_sector_bg_info(request,  economic_sector_id):
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('bg_information.html')
@@ -36,7 +36,7 @@ def economic_sector_bg_info(request,  economic_sector_id):
     }
     return HttpResponse(template.render(context, request))
     
-@login_required
+#@login_required
 def economic_sector_interactions(request,  economic_sector_id):
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     template = loader.get_template('interactions.html')
@@ -48,7 +48,7 @@ def economic_sector_interactions(request,  economic_sector_id):
     return HttpResponse(template.render(context, request))
 
 
-@login_required
+#@login_required
 def economic_sector_form(request, economic_sector_id):
     usertype_list = UserType.objects.order_by('id')
     impact_list = Impact.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
@@ -66,7 +66,7 @@ def economic_sector_form(request, economic_sector_id):
 
 
 
-@login_required
+#@login_required
 def economic_sector_result(request, usertype_id, economic_sector_id):
     impact_list = ()
     for key, value in request.POST.items():
