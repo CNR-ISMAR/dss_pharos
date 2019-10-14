@@ -14,7 +14,7 @@
         <div class="col-md-8">
         {% block body %}
 
-        <h3>Recommendations and info  for {{ usertype.user_type } about {{ economic_sector.title }}</h3>
+        <h3>Recommendations and info  for {{ usertype.user_type }} about {{ economic_sector.title }}</h3>
 	  {% if recommendation_list %}
           {% for recommendation in recommendation_list %}
         <p>{{ recommendation.recommendation_text | safe }} </p>
