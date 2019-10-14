@@ -13,10 +13,8 @@
       <div class="row">
         <div class="col-md-8">
         {% block body %}
-        <H1>DSS Pharos</H1>
-        <h4>User type: {{ usertype.user_type }}</h4>
-      
-        <h3>Recommendations and info  for {{ economic_sector.title }}</h3>
+
+        <h3>Recommendations and info  for {{ usertype.user_type } about {{ economic_sector.title }}</h3>
 	  {% if recommendation_list %}
           {% for recommendation in recommendation_list %}
         <p>{{ recommendation.recommendation_text | safe }} </p>

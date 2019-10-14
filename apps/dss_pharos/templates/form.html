@@ -12,7 +12,7 @@
     <div class="container">
       {% block body_outer %}
       <div class="row">
-        <div class="col-md-8">
+
         {% block body %}
         <H1>DSS Pharos</H1>
         <h3>{{ economic_sector.description }}</h3>
@@ -33,36 +33,44 @@
           } );
 
           function updateForm(){
-            user = $('select.usertype').children("option:selected").val();
+            console.log('updateform');
+            user = $("input:radio[name='usertype']:checked").val()
             $('form').attr('action', '/1/'+ user + '/result');
-            disabled = (user == '0')
+            disabled = (user == void(0));
             $(':input[type="submit"]').prop('disabled', disabled)
 
             }
 
 
         </script>
-        <form action="#" method="post">
+        <form id="dss_form" action="#" method="post" onreset="updateForm()">
         {% csrf_token %}
-        <div id="selectdiv">
-            <select class="usertype" onchange="updateForm()">
-                <option value="0" selected>---------</option>
-        {% for usertype in usertype_list %}
-            <option value="{{ usertype.pk }}">{{ usertype.user_type }}</option>
-        {% endfor %}
-           </select>
-            <div id="impact_list">
+            <div id="selectdiv" class="col-md-4 funkyradio">
+                <h6>Select user type</h6>
+            {% for usertype in usertype_list %}
+            <div class="funkyradio-primary">
+            <input type="radio" name="usertype" id="radio_{{ usertype.pk }}" value="{{ usertype.pk }}" class="usertype" onchange="updateForm()">
+                <label for="radio_{{ usertype.pk }}">{{ usertype.user_type }}</label>
+            </div>
+            {% endfor %}
+            </div>
+            <div id="impact_list" class="col-md-4">
+                <h6>Select Impacts</h6>
             {% include "impact_list_form.html" %}
-               </div>
-        </div>
-        <input type="reset" value="Clear" />
-		<input type="submit" value="Submit" disabled />
-        </form>
+            </div>
+
+
         {% endblock %}
-        </div>
+
         <div class="col-md-4">
-        {% block sidebar %}{% endblock %}
+        {% block sidebar %}
+            <a id="clearbutton" class="btn btn-primary btn-md btn-block" href="#" onclick="$('#dss_form')[0].reset(); updateForm();">
+            Clear
+                </a>
+		    <input class="btn btn-primary btn-md btn-block" type="submit" value="Submit" disabled />
+            {% endblock %}
         </div>
+         </form>
       </div>
       {% endblock %}
     </div>

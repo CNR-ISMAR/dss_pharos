@@ -1,7 +1,11 @@
-<ul>
+<ul class="list-group">
     {% if impact_list %}
         {% for impact in impact_list %}
-        <li><input type="checkbox" name="impact_{{ impact.pk }}" value="{{ impact.pk }}" checked>{{ impact.impact_name }} &nbsp;</li>
+        <li class="list-group-item">
+
+            <input type="checkbox" name="impact_{{ impact.pk }}" value="{{ impact.pk }}" data-toggle="toggle" checked>
+            {{ impact.impact_name }}
+            &nbsp;</li>
         {% endfor %}
     {% else %}
         <li>Impact list empty for {{ economic_sector</li>
