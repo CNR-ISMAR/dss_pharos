@@ -42,10 +42,16 @@
         </div>
         <div class="col-md-4">
         {% block sidebar %}
+            {% if economic_sector.form_enabled %}
         <a id="proceed"  class="btn btn-primary btn-md btn-block" href="/{{ economic_sector.id }}/form">
-	<h4>Proceed</h4>
+	        <h4>Proceed</h4>
         </a>
-
+            {% else %}
+            The form section is not yet activated for this sector
+            {% endif %}
+             <a id="restart"  class="btn btn-primary btn-md btn-block" href="/start">
+	        <h4>Restart inqury</h4>
+            </a>
 	{% endblock %}
         </div>
       </div>
