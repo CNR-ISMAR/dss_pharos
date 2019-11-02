@@ -51,6 +51,11 @@ class RecommendationAdmin(admin.ModelAdmin):
     list_display = ('pk','economic_sector', 'title',)
     filter_horizontal = ('impact',)
 
+class DescriptionAdmin(admin.ModelAdmin):
+    fields = ['textView', 'textContent']
+
+
+
 admin.site.register(UserType)
 admin.site.register(EconomicSector, EconomicSectorAdmin)
 admin.site.register(Impact, ImpactAdmin)

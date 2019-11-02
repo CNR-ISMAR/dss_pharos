@@ -13,6 +13,7 @@ class EconomicSector(models.Model):
     bg_image=models.ImageField(upload_to='images',blank=True,null=True)
     interactions = RichTextUploadingField(blank=True, null=True)
     interactions_image=models.ImageField(upload_to='images',blank=True,null=True)
+    form_enabled=models.BooleanField
 
     def __str__(self):
         return self.description
@@ -62,4 +63,6 @@ class Collection(models.Model):
         impact = models.ForeignKey(Impact, blank=True, null=True, on_delete=models.SET_NULL)
 
 
-
+class Description(models.Model):
+    textView = models.CharField(max_length=100)
+    textContent = RichTextUploadingField()
