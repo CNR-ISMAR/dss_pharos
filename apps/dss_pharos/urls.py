@@ -4,8 +4,8 @@ from django.views.generic import TemplateView
 from apps.dss_pharos import views
 
 urlpatterns = [
-    url(r'^$', TemplateView.as_view(template_name='dss_index.html'), name='dsshome'),
-    url(r'^index$', TemplateView.as_view(template_name='dss_index.html'), name='dsshome'),
+    url(r'^$', views.home, name='dsshome'),
+    url(r'^index$', views.home, name='dsshome'),
     url(r'^start$', views.sector_sel, name='dss_1'),
     url(r'^(?P<economic_sector_id>\d+)$', views.economic_sector_bg_info, name='economic_sector_bg_info'),
     url(r'^(?P<economic_sector_id>\d+)/ii$', views.economic_sector_interactions, name='economic_sector_interactions'),

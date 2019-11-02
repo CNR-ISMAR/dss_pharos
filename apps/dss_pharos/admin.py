@@ -2,14 +2,15 @@ from django.contrib import admin
 
 # Register your models here.
 
+
 from django import forms
 from ckeditor.widgets import CKEditorWidget
 
 # Register your models here.
-from .models import UserType, EconomicSector, Impact,  Recommendation, Collection
+from .models import UserType, EconomicSector, Impact,  Recommendation, Collection, Description
 
 class EconomicSectorAdmin(admin.ModelAdmin):
-    fields = ['title', 'description', 'bg_information', 'bg_image','interactions', 'interactions_image']
+    fields = ['title', 'description', 'bg_information', 'bg_image','interactions', 'interactions_image', 'form_enabled']
     list_display = ('id', 'title','description')
     list_display_links = ('id', 'title')
     ordering = ['id']
@@ -50,14 +51,18 @@ class RecommendationAdmin(admin.ModelAdmin):
     list_filter = ['economic_sector', 'user_type']
     list_display = ('pk','economic_sector', 'title',)
     filter_horizontal = ('impact',)
+    ordering = ['id']
 
 class DescriptionAdmin(admin.ModelAdmin):
     fields = ['textView', 'textContent']
-
-
+    list_display = ['id', 'textView']
+    ordering = ['id']
+    exclude=("textView ",)
+    readonly_fields=('textView', )
 
 admin.site.register(UserType)
 admin.site.register(EconomicSector, EconomicSectorAdmin)
 admin.site.register(Impact, ImpactAdmin)
 admin.site.register(Recommendation,RecommendationAdmin)
+admin.site.register(Description, DescriptionAdmin)
 

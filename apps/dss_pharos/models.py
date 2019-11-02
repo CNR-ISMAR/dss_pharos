@@ -7,13 +7,13 @@ from django.db import models
 
 
 class EconomicSector(models.Model):
-    title = models.CharField(max_length=80, blank=True, null=True, )
-    description = models.CharField(max_length=400)
-    bg_information = RichTextUploadingField()
+    title = models.CharField("Title", max_length=80, blank=True, null=True, )
+    description = models.CharField("Description", max_length=400)
+    bg_information = RichTextUploadingField("Background infromations")
     bg_image=models.ImageField(upload_to='images',blank=True,null=True)
-    interactions = RichTextUploadingField(blank=True, null=True)
+    interactions = RichTextUploadingField("Impacts/Interactions ", blank=True, null=True)
     interactions_image=models.ImageField(upload_to='images',blank=True,null=True)
-    form_enabled=models.BooleanField
+    form_enabled=models.BooleanField("This sector has form enabled", default=True)
 
     def __str__(self):
         return self.description
@@ -27,7 +27,7 @@ class UserType(models.Model):
 
 class Impact(models.Model):
     economic_sector = models.ManyToManyField(EconomicSector) 
-    impact_name = models.CharField(max_length=100)
+    impact_name = models.CharField("Impact name",max_length=100)
     impact_description = models.TextField(max_length=500, null=True, blank=True)
 
 
@@ -64,5 +64,8 @@ class Collection(models.Model):
 
 
 class Description(models.Model):
-    textView = models.CharField(max_length=100)
-    textContent = RichTextUploadingField()
+    textView = models.CharField(max_length=100, unique=True)
+    textContent = RichTextField(blank=True)
+
+    def __unicode__(self):
+        return self.textView
