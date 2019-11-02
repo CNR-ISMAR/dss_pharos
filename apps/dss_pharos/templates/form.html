@@ -35,7 +35,7 @@
           function updateForm(){
             console.log('updateform');
             user = $("input:radio[name='usertype']:checked").val()
-            $('form').attr('action', '/1/'+ user + '/result');
+            $('form').attr('action', '/' + {{ economic_sector.id }} + '/'+ user + '/result');
             disabled = (user == void(0));
             $(':input[type="submit"]').prop('disabled', disabled)
 
