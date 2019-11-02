@@ -46,6 +46,7 @@ class CollectionInline(admin.TabularInline):
 
 class RecommendationAdmin(admin.ModelAdmin):
 #form = RecommendationAdminForm
+    ordering = ['id']
     fields = ['economic_sector',  'title', 'user_type', 'all_users', 'recommendation_text', ]
     inlines = [CollectionInline]
     list_filter = ['economic_sector', 'user_type']
