@@ -30,12 +30,20 @@
 
 .navbar-inverse {
   background-color: #00a7e2;
-  border-color: #080808;
+  border-color: #00a7e2;
 }
 
 footer {
     background-color: #00a7e2;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #00a7e2;
+    border-color: #00a7e2;
+}
+
+
 
 #wrap {
 

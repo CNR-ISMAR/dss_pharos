@@ -21,28 +21,7 @@
         
 
 
-        <script>
-          var selectedUsertype;
-          $(document).ready( function() {
-                $("select.usertype").change(function(){
-                console.log
-                var selectedUsertype = $(this).children("option:selected").val();
-                alert("You have selected the usertype  - " + selectedUserType);
 
-                });
-          } );
-
-          function updateForm(){
-            console.log('updateform');
-            user = $("input:radio[name='usertype']:checked").val()
-            $('form').attr('action', '/' + {{ economic_sector.id }} + '/'+ user + '/result');
-            disabled = (user == void(0));
-            $(':input[type="submit"]').prop('disabled', disabled)
-
-            }
-
-
-        </script>
         <form id="dss_form" action="#" method="post" onreset="updateForm()">
         {% csrf_token %}
             <div id="selectdiv" class="col-md-4 funkyradio">
@@ -65,9 +44,11 @@
         <div class="col-md-4">
         {% block sidebar %}
             <a id="clearbutton" class="btn btn-primary btn-md btn-block" href="#" onclick="$('#dss_form')[0].reset(); updateForm();">
-            Clear
+                <h4>Clear</h4>
                 </a>
-		    <input class="btn btn-primary btn-md btn-block" type="submit" value="Submit" disabled />
+            <a id="submitbutton" class="btn btn-primary btn-md btn-block" href="#" onclick="$('#dss_form').submit()">
+		    <h4>Submit</h4>
+            </a>
             {% endblock %}
         </div>
          </form>
@@ -77,3 +58,22 @@
     {% endblock middle %}
 
 
+{% block extra_script %}
+        <script>
+          var selectedUsertype;
+          function updateForm(){
+            console.log('updateform');
+            user = $("input:radio[name='usertype']:checked").val()
+            $('form').attr('action', '/' + {{ economic_sector.id }} + '/'+ user + '/result');
+            disabled = (user == void(0));
+            $('#submitbutton').attr('disabled', disabled)
+
+            }
+          $(document).ready( function() {
+
+
+
+            updateForm();
+          } );
+        </script>
+{% endblock extra_script %}
