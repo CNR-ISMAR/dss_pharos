@@ -19,11 +19,15 @@
         {% if home_description %}
                 {{ home_description.textContent | safe }}
         {% endif %}
-            <a href="./start">Start DSS Pharos </a>
+
             {% endblock %}
         </div>
         <div class="col-md-4">
-        {% block sidebar %}{% endblock %}
+        {% block sidebar %}
+             <a  class="btn btn-primary btn-md btn-block" href="./start">
+                 <h4>Start DSS Pharos</h4>
+             </a>
+            {% endblock %}
         </div>
       </div>
       {% endblock %}
