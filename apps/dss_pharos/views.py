@@ -2,26 +2,27 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.template import loader
-from .models import UserType, EconomicSector, Recommendation,  Impact
+from .models import UserType, EconomicSector, Recommendation,  Impact, Description
 
 # Create your views here.
 
 #@login_required
-def level_1(request):
-    usertype_list = UserType.objects.order_by('id')
-    #output = '<br> '.join([p.user_type for p in usertype_list])
-    template = loader.get_template('level_1.html')
+def home(request):
+    home_description = Description.objects.filter(textView__exact='home').first()
+    template = loader.get_template('dss_index.html')
     context = {
-        'usertype_list': usertype_list,
+        'home_description': home_description,
     }
     return HttpResponse(template.render(context, request))
 
 #@login_required
 def sector_sel(request):
     economic_sector_list = EconomicSector.objects.order_by('id')
+    sector_sel_description = Description.objects.filter(textView__exact='sector_sel').first()
     template = loader.get_template('sector_sel.html')
     context = {
         'economic_sector_list': economic_sector_list,
+        'sector_sel_description': sector_sel_description,
     }
     return HttpResponse(template.render(context, request))
 
@@ -72,7 +73,7 @@ def economic_sector_result(request, usertype_id, economic_sector_id):
     for key, value in request.POST.items():
         if key[0:6]=='impact':
             impact_list= impact_list + (value,)
-    recommendation_list = Recommendation.objects.filter(impact__id__in=impact_list, user_type__id=usertype_id).distinct()
+    recommendation_list = Recommendation.objects.filter(impact__id__in=impact_list, user_type__id=usertype_id).distinct() |  Recommendation.objects.filter(impact__id__in=impact_list, all_users=True).distinct()
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('result.html')

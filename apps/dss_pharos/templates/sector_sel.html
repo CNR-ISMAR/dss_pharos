@@ -17,7 +17,9 @@
 
         
         <h2>Economic sector selection</h2>
-
+        {% if sector_sel_description %}
+        {{ sector_sel_description.textContent | safe }}
+        {% endif %}
         {% if economic_sector_list %}
         <ul>
         {% for economic_sector in economic_sector_list %}
