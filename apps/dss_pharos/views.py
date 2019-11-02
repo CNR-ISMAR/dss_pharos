@@ -8,7 +8,7 @@ from .models import UserType, EconomicSector, Recommendation,  Impact, Descripti
 
 #@login_required
 def home(request):
-    home_description = Description.objects.filter(textView__exact='home').first().textContent
+    home_description = Description.objects.filter(textView__exact='home').first()
     template = loader.get_template('dss_index.html')
     context = {
         'home_description': home_description,
@@ -18,7 +18,7 @@ def home(request):
 #@login_required
 def sector_sel(request):
     economic_sector_list = EconomicSector.objects.order_by('id')
-    sector_sel_description = Description.objects.filter(textView__exact='sector_sel').first().textContent
+    sector_sel_description = Description.objects.filter(textView__exact='sector_sel').first()
     template = loader.get_template('sector_sel.html')
     context = {
         'economic_sector_list': economic_sector_list,

@@ -16,9 +16,9 @@
         <div class="col-md-8">
         {% block body %}
             <H1>DSS Pharos</H1>
-        &nbsp;
-                {{ home_description | safe }}
-
+        {% if home_description %}
+                {{ home_description.textContent | safe }}
+        {% endif %}
             <a href="./start">Start DSS Pharos </a>
             {% endblock %}
         </div>
