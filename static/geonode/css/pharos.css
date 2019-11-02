@@ -1,10 +1,10 @@
 .pharos-navbar{
 
-    background: url(../img/logo_pharos.jpg) 0 10px no-repeat;
+    background: url(../img/logo_pharos.png) 0 0px no-repeat;
     background-size: 100%;
     text-indent: -9999px;
     height: 80px;
-    width: 200px;
+    width: 440px;
 }
 
 .pharos-navbar {
@@ -26,6 +26,15 @@
   .navbar > .container-fluid .pharos-navbar {
     margin-left: -15px;
   }
+}
+
+.navbar-inverse {
+  background-color: #00a7e2;
+  border-color: #080808;
+}
+
+footer {
+    background-color: #00a7e2;
 }
 
 #wrap {
