@@ -40,9 +40,11 @@ def economic_sector_bg_info(request,  economic_sector_id):
 #@login_required
 def economic_sector_interactions(request,  economic_sector_id):
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
+    form_description = Description.objects.filter(textView__exact='form').first()
     template = loader.get_template('interactions.html')
     context = {
         'economic_sector': economic_sector,
+        'form_description': form_description,
         #'economic_sector_description': economic_sector.description,
         #'economic_sector_id': economic_sector.pk,
     }
