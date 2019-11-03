@@ -18,10 +18,9 @@
         <h3>{{ economic_sector.description }}</h3>
         
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-          {% if form_description %}
+        {% if form_description %}
         {{ form_description.textContent | safe }}
         {% endif %}
-
 
 
         <form id="dss_form" action="#" method="post" onreset="updateForm()">

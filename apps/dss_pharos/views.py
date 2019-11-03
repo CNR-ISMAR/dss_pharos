@@ -40,11 +40,9 @@ def economic_sector_bg_info(request,  economic_sector_id):
 #@login_required
 def economic_sector_interactions(request,  economic_sector_id):
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
-    form_description = Description.objects.filter(textView__exact='form').first()
     template = loader.get_template('interactions.html')
     context = {
         'economic_sector': economic_sector,
-        'form_description': form_description,
         #'economic_sector_description': economic_sector.description,
         #'economic_sector_id': economic_sector.pk,
     }
@@ -56,11 +54,13 @@ def economic_sector_form(request, economic_sector_id):
     usertype_list = UserType.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
     impact_list = Impact.objects.filter(economic_sector__id__exact=economic_sector_id).order_by('id')
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
+    form_description = Description.objects.filter(textView__exact='form').first()
     template = loader.get_template('form.html')
     context = {
         'economic_sector': economic_sector,
         'usertype_list': usertype_list,
         'impact_list':impact_list,
+        'form_description': form_description,
         #'economic_sector_description': economic_sector.description,
         #'economic_sector_id': economic_sector.pk,
     }
