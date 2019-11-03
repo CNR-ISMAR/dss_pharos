@@ -65,7 +65,7 @@ class Collection(models.Model):
 
 class Description(models.Model):
     textView = models.CharField(max_length=100, unique=True)
-    textContent = RichTextField(blank=True)
+    textContent = RichTextUploadingField(blank=True)
 
     def __unicode__(self):
         return self.textView
