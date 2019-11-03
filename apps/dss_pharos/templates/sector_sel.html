@@ -21,9 +21,15 @@
         {{ sector_sel_description.textContent | safe }}
         {% endif %}
         {% if economic_sector_list %}
-        <ul>
+        <ul class="fa-ul" style="color: steelblue;">
         {% for economic_sector in economic_sector_list %}
-        <li><a href="{{ usertype.id }}/{{ economic_sector.id }}">{{ economic_sector.description }}</a></li>
+        <li>
+        {% if economic_sector.form_enabled %}
+        <i class="fa-li fa fa-check"></i>
+        {% else %}
+        <i class="fa-li fa fa-cog fa-spin"></i>
+        {% endif %}
+        <a href="{{ usertype.id }}/{{ economic_sector.id }}">{{ economic_sector.description }}</a></li>
     {% endfor %}
     </ul>
 {% else %}
