@@ -75,7 +75,7 @@ def economic_sector_result(request, usertype_id, economic_sector_id):
     for key, value in request.POST.items():
         if key[0:6]=='impact':
             impact_list= impact_list + (value,)
-    recommendation_list = Recommendation.objects.filter(impact__id__in=impact_list, user_type__id=usertype_id).distinct() |  Recommendation.objects.filter(impact__id__in=impact_list, all_users=True).distinct()
+    recommendation_list = Recommendation.objects.filter(economic_sector__id=economic_sector_id,  impact__id__in=impact_list, user_type__id=usertype_id).distinct() |  Recommendation.objects.filter(economic_sector__id=economic_sector_id,impact__id__in=impact_list, all_users=True).distinct()
     economic_sector = get_object_or_404(EconomicSector, pk=economic_sector_id)
     usertype = UserType.objects.get(pk=usertype_id)
     template = loader.get_template('result.html')
