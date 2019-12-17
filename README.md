@@ -1,4 +1,9 @@
+================
+PHAROS4MPAS-DST
+================
+----------------------------------------------------------------------
 Decision Support Tool developed in the context of Pharos4MPAs project
+----------------------------------------------------------------------
 
 The DST of Pharos4mpas is a Django.based application with the aim of present to different stakeholders the recommendation about compatibility of different marine uses related to their respective economic secotr and MPA management.
 
