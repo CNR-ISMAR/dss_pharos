@@ -20,6 +20,7 @@
           {% for recommendation in recommendation_list %}
         <h4>{{ recommendation.title }}</h4>
         <p>{{ recommendation.recommendation_text | safe }} </p>
+	<hr />
 	    {% endfor %}
     {% else %}
     <p>Recommendation list empty.</p>
